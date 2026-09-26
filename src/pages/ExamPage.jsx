@@ -11,6 +11,7 @@ const EXAM_DURATION_SEC = 60 * 60; // 60 minutes
 // ── Subject ordering ──
 const SUBJECT_PRIORITY = { Mathematics: 1, Aptitude: 2, English: 3, 'C Basics': 4 };
 const organizeQuestions = (qs) => [...qs].sort((a, b) => (SUBJECT_PRIORITY[a.subject] || 5) - (SUBJECT_PRIORITY[b.subject] || 5));
+const normalizeOptionKey = (key) => typeof key === 'string' ? key.trim().toUpperCase() : key;
 
 // ── 5-State Question Status ──
 const getQuestionStatus = (qId, answers, marks, visited) => {
@@ -182,8 +183,9 @@ export default function ExamPage() {
 
     function handleSelectOption(optKey) {
         if (isSubmitted || !currentQ) return;
+        const normalizedOptionKey = normalizeOptionKey(optKey);
         const current = answers[currentQ.id];
-        setAnswers(prev => ({ ...prev, [currentQ.id]: current === optKey ? null : optKey }));
+        setAnswers(prev => ({ ...prev, [currentQ.id]: current === normalizedOptionKey ? null : normalizedOptionKey }));
     }
 
     function handleToggleMark() {
@@ -198,7 +200,7 @@ export default function ExamPage() {
         // Compute score
         let score = 0;
         questions.forEach(q => {
-            if (answers[q.id] && answers[q.id] === ANSWER_KEY[q.id]) score++;
+            if (answers[q.id] && normalizeOptionKey(answers[q.id]) === normalizeOptionKey(ANSWER_KEY[q.id])) score++;
         });
         sessionStorage.setItem('mockExamResult', JSON.stringify({ answers, score, total: questions.length }));
         setIsSubmitted(true);
@@ -214,10 +216,9 @@ export default function ExamPage() {
         function handleKeyDown(e) {
             if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
             const key = e.key.toUpperCase();
-            if (['A', 'B', 'C', 'D'].includes(key)) {
+            if (currentQ?.options && Object.keys(currentQ.options).includes(key)) {
                 e.preventDefault();
-                const optKey = key.toLowerCase();
-                handleSelectOption(optKey);
+                handleSelectOption(key);
             } else if (e.key === 'ArrowLeft') {
                 e.preventDefault();
                 setCurrentIndex(prev => Math.max(0, prev - 1));

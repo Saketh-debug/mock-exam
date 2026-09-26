@@ -6,6 +6,7 @@ import FooterLogos from '../components/FooterLogos';
 
 const SUBJECT_PRIORITY = { Mathematics: 1, Aptitude: 2, English: 3, 'C Basics': 4 };
 const organizeQuestions = (qs) => [...qs].sort((a, b) => (SUBJECT_PRIORITY[a.subject] || 5) - (SUBJECT_PRIORITY[b.subject] || 5));
+const normalizeOptionKey = (key) => typeof key === 'string' ? key.trim().toUpperCase() : key;
 
 const SUBJECT_COLORS = {
     Mathematics: { text: 'text-[#E76F51]', bg: 'bg-[#E76F51]/15', border: 'border-[#E76F51]/30' },
@@ -58,7 +59,7 @@ export default function ResultsPage() {
             if (!map[q.subject]) map[q.subject] = { total: 0, correct: 0, attempted: 0 };
             map[q.subject].total++;
             if (answers[q.id]) map[q.subject].attempted++;
-            if (answers[q.id] === ANSWER_KEY[q.id]) map[q.subject].correct++;
+            if (normalizeOptionKey(answers[q.id]) === normalizeOptionKey(ANSWER_KEY[q.id])) map[q.subject].correct++;
         });
         return Object.entries(map).sort((a, b) => (SUBJECT_PRIORITY[a[0]] || 5) - (SUBJECT_PRIORITY[b[0]] || 5));
     }, [questions, answers]);
@@ -112,7 +113,7 @@ export default function ResultsPage() {
                             <div className="text-[10px] text-emerald-300 font-mono uppercase mt-0.5">Correct</div>
                         </div>
                         <div className="p-3 bg-[#b91c1c]/15 border border-[#ef4444]/30 rounded-xl text-center">
-                            <div className="text-xl font-extrabold text-red-400">{Object.keys(answers).filter(k => answers[k] && answers[k] !== ANSWER_KEY[parseInt(k)]).length}</div>
+                            <div className="text-xl font-extrabold text-red-400">{Object.keys(answers).filter(k => answers[k] && normalizeOptionKey(answers[k]) !== normalizeOptionKey(ANSWER_KEY[parseInt(k)])).length}</div>
                             <div className="text-[10px] text-red-300 font-mono uppercase mt-0.5">Wrong</div>
                         </div>
                         <div className="p-3 bg-[#162932] border border-[rgba(42,157,143,0.25)] rounded-xl text-center">
@@ -170,7 +171,7 @@ export default function ResultsPage() {
                         {questions.map((q, idx) => {
                             const userAns = answers[q.id];
                             const correctAns = ANSWER_KEY[q.id];
-                            const isCorrect = userAns === correctAns;
+                            const isCorrect = normalizeOptionKey(userAns) === normalizeOptionKey(correctAns);
                             const isSkipped = !userAns;
                             const cols = SUBJECT_COLORS[q.subject] || SUBJECT_COLORS.Mathematics;
 

@@ -56,11 +56,11 @@ function FloatingShapes() {
 
 const subjects = [
     { name: 'Mathematics', questions: 15, icon: '∑' },
-    { name: 'Aptitude', questions: 10, icon: '◈' },
+    { name: 'Aptitude', questions: 7, icon: '◈' },
     { name: 'English', questions: 5, icon: 'Aa' },
     { name: 'C Basics', questions: 3, icon: '</>' },  // updated count from question paper
 ];
-// Note: 15 Math is split across Q4–Q15 (12) + Q1–Q3 (3 C Basics) +  Q16–Q25 (10 Apt) + Q26–Q30 (5 Eng) = 30 total
+// 30 questions: 15 Mathematics, 7 Aptitude, 5 English, and 3 C Basics.
 
 const subjectStyles = [
     { colorVar: '--s-accent-coral', bgClass: 'student-badge-coral' },
