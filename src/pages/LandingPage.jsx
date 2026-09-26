@@ -90,11 +90,11 @@ export default function LandingPage() {
 
             {/* ═══ Sticky Header ═══ */}
             <header className="w-full border-b student-header sticky top-0 z-30 px-6 sm:px-12 py-3.5 shadow-lg"
-                    style={{ borderColor: 'var(--s-border)', backgroundColor: 'var(--s-bg-header)' }}>
+                style={{ borderColor: 'var(--s-border)', backgroundColor: 'var(--s-bg-header)' }}>
                 <div className="max-w-6xl mx-auto flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                         <span className="font-mono text-[11px] font-bold tracking-widest px-3 py-1.5 bg-gradient-to-r from-[#E76F51] to-[#F4A261] text-white rounded-md flex items-center gap-2"
-                              style={{ boxShadow: 'var(--s-shadow-glow-coral)' }}>
+                            style={{ boxShadow: 'var(--s-shadow-glow-coral)' }}>
                             <span className="w-2 h-2 rounded-full bg-white animate-ping" />
                             <span>AAC</span>
                         </span>
@@ -114,27 +114,16 @@ export default function LandingPage() {
             </header>
 
             {/* ═══ Main Content ═══ */}
-            <main className="max-w-6xl mx-auto w-full px-6 sm:px-12 py-12 sm:py-20 flex-1 flex flex-col relative z-10">
+            <main className="max-w-6xl mx-auto w-full px-6 sm:px-12 py-12 sm:py-20 flex-1 flex flex-col relative z-0">
 
                 {/* ── Demo Notice Banner ── */}
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-8 px-5 py-3 rounded-xl border flex items-center gap-3 student-badge-gold"
-                >
-                    <span className="text-lg">🎯</span>
-                    <div className="text-sm font-medium student-text-heading">
-                        <span className="font-bold">Mock Demo</span>
-                        <span className="student-text-secondary font-normal"> — Practice the exam interface before your actual test. Your answers here won't be recorded.</span>
-                    </div>
-                </motion.div>
+                
 
                 {/* ── Hero Section ── */}
                 <motion.div className="text-center mb-20" initial="hidden" animate="visible" variants={staggerContainer}>
                     <motion.div variants={fadeUp} custom={0} className="mb-6">
                         <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-mono font-bold tracking-[0.15em] uppercase shadow-md student-card"
-                              style={{ color: 'var(--s-accent-gold)' }}>
+                            style={{ color: 'var(--s-accent-gold)' }}>
                             <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--s-accent-teal)' }} />
                             FIRST YEAR EXAMINATION · 2026
                         </span>
@@ -150,7 +139,7 @@ export default function LandingPage() {
 
                     <motion.div variants={fadeUp} custom={3} className="flex justify-center mb-8">
                         <div className="h-[3px] w-28 rounded-full"
-                             style={{ background: `linear-gradient(to right, var(--s-accent-coral), var(--s-accent-orange), var(--s-accent-teal))` }} />
+                            style={{ background: `linear-gradient(to right, var(--s-accent-coral), var(--s-accent-orange), var(--s-accent-teal))` }} />
                     </motion.div>
 
                     <motion.p variants={fadeUp} custom={4} className="text-base sm:text-lg leading-relaxed max-w-xl mx-auto font-normal student-text-secondary">
@@ -232,13 +221,13 @@ export default function LandingPage() {
                         </motion.div>
                         <div className="relative">
                             <div className="absolute left-[19px] sm:left-[23px] top-0 bottom-0 w-[2px] rounded-full"
-                                 style={{ background: `linear-gradient(to bottom, var(--s-accent-coral), var(--s-accent-orange), var(--s-accent-teal))` }} />
+                                style={{ background: `linear-gradient(to bottom, var(--s-accent-coral), var(--s-accent-orange), var(--s-accent-teal))` }} />
                             <div className="space-y-4">
                                 {examDetails.map((item, idx) => (
                                     <motion.div key={item.num} variants={fadeUp} custom={idx + 1} className="flex items-start gap-5 sm:gap-6">
                                         <div className="relative z-10 shrink-0">
                                             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md flex items-center justify-center font-mono font-bold text-xs student-card"
-                                                 style={{ color: 'var(--s-accent-gold)' }}>
+                                                style={{ color: 'var(--s-accent-gold)' }}>
                                                 {item.num}
                                             </div>
                                         </div>
