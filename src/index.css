@@ -1,0 +1,845 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   THEME SYSTEM — CSS Custom Properties
+   Dark (default) and Light themes for student-facing pages.
+   Admin pages are unaffected — they use hardcoded dark values.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Core Custom Properties (User Palette) ── */
+:root {
+    /* Core */
+    --forest: #163832;
+    --coral: #E76F51;
+
+    /* Secondary */
+    --teal: #2A9D8F;
+    --gold: #E9C46A;
+    --orange: #F4A261;
+
+    /* Background */
+    --mint: #AFE7D9;
+    --soft-mint: #B9DED8;
+    --pale-mint: #E8F4F1;
+
+    /* Surfaces */
+    --white: #FFFFFF;
+    --off-white: #F9FCFB;
+
+    /* Decorative */
+    --soft-coral: #E8C2B5;
+
+    /* Borders */
+    --border: #D7EAE5;
+}
+
+/* ── Dark Theme (Default) ── */
+:root,
+[data-theme="dark"] {
+    /* Backgrounds */
+    --s-bg: #122027;
+    --s-bg-alt: #0E1A20;
+    --s-bg-card: rgba(27, 49, 59, 0.9);
+    --s-bg-card-solid: #1B313B;
+    --s-bg-elevated: #264653;
+    --s-bg-input: rgba(18, 32, 39, 0.9);
+    --s-bg-header: rgba(22, 41, 50, 0.9);
+
+    /* Text */
+    --s-text: #F1F5F9;
+    --s-text-secondary: #9CB6BF;
+    --s-text-muted: rgba(156, 182, 191, 0.7);
+    --s-text-heading: #FFFFFF;
+
+    /* Accents — mapped to 5-color palette */
+    --s-accent-coral: #E76F51;
+    --s-accent-coral-hover: #F4A261;
+    --s-accent-teal: #2A9D8F;
+    --s-accent-gold: #E9C46A;
+    --s-accent-orange: #F4A261;
+    --s-accent-deep: #264653;
+
+    /* Accent Transparencies */
+    --s-coral-bg: rgba(231, 111, 81, 0.15);
+    --s-coral-border: rgba(231, 111, 81, 0.4);
+    --s-teal-bg: rgba(42, 157, 143, 0.15);
+    --s-teal-border: rgba(42, 157, 143, 0.3);
+    --s-gold-bg: rgba(233, 196, 106, 0.15);
+    --s-gold-border: rgba(233, 196, 106, 0.3);
+    --s-orange-bg: rgba(244, 162, 97, 0.15);
+    --s-orange-border: rgba(244, 162, 97, 0.4);
+
+    /* Borders */
+    --s-border: rgba(42, 157, 143, 0.25);
+    --s-border-hover: #2A9D8F;
+    --s-border-input: rgba(42, 157, 143, 0.35);
+
+    /* Shadows */
+    --s-shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --s-shadow-glow-coral: 0 0 20px rgba(231, 111, 81, 0.35);
+    --s-shadow-glow-teal: 0 0 12px rgba(42, 157, 143, 0.2);
+
+    /* Scrollbar */
+    --s-scrollbar-track: #0E1A20;
+    --s-scrollbar-thumb: #264653;
+    --s-scrollbar-thumb-hover: #2A9D8F;
+
+    /* Floating orbs */
+    --s-orb-1: #264653;
+    --s-orb-2: #2A9D8F;
+    --s-orb-3: #E76F51;
+    --s-orb-4: #E9C46A;
+    --s-orb-opacity-1: 0.20;
+    --s-orb-opacity-2: 0.25;
+    --s-orb-opacity-3: 0.20;
+    --s-orb-opacity-4: 0.15;
+
+    /* Selection */
+    --s-selection-bg: #E76F51;
+    --s-selection-text: #FFFFFF;
+
+    /* Tech grid */
+    --s-grid-dot: rgba(42, 157, 143, 0.14);
+}
+
+/* ── Light Theme (Mint & Forest Palette) ── */
+[data-theme="light"] {
+    /* Core & User Palette Tokens */
+    --forest: #163832;
+    --coral: #E76F51;
+    --teal: #2A9D8F;
+    --gold: #E9C46A;
+    --orange: #F4A261;
+    --mint: #AFE7D9;
+    --soft-mint: #B9DED8;
+    --pale-mint: #E8F4F1;
+    --white: #FFFFFF;
+    --off-white: #F9FCFB;
+    --soft-coral: #E8C2B5;
+    --border: #D7EAE5;
+
+    /* Backgrounds mapped from palette */
+    --s-bg: var(--pale-mint);           /* #E8F4F1 - Soothing pale mint page background */
+    --s-bg-alt: var(--soft-mint);       /* #B9DED8 - Soft mint alternate */
+    --s-bg-card: rgba(255, 255, 255, 0.94); /* Crisp white with glassmorphic blur */
+    --s-bg-card-solid: var(--white);    /* #FFFFFF - Pure white cards */
+    --s-bg-elevated: var(--off-white);  /* #F9FCFB - Elevated off-white */
+    --s-bg-input: var(--white);         /* #FFFFFF - Crisp white input surfaces */
+    --s-bg-header: rgba(232, 244, 241, 0.92); /* Pale mint header with glass blur */
+
+    /* Text mapped from palette */
+    --s-text: var(--forest);            /* #163832 - Deep rich forest for body text */
+    --s-text-secondary: #2C564E;        /* Forest secondary text */
+    --s-text-muted: #557F77;            /* Muted forest green text */
+    --s-text-heading: var(--forest);    /* #163832 - Deep forest headings */
+
+    /* Accents mapped from palette */
+    --s-accent-coral: var(--coral);     /* #E76F51 - Core coral */
+    --s-accent-coral-hover: #D65A3C;
+    --s-accent-teal: var(--teal);       /* #2A9D8F - Secondary teal */
+    --s-accent-gold: var(--gold);       /* #E9C46A - Secondary gold */
+    --s-accent-orange: var(--orange);   /* #F4A261 - Secondary orange */
+    --s-accent-deep: var(--forest);     /* #163832 - Core forest */
+
+    /* Accent Transparencies */
+    --s-coral-bg: rgba(231, 111, 81, 0.12);
+    --s-coral-border: rgba(231, 111, 81, 0.35);
+    --s-teal-bg: rgba(42, 157, 143, 0.12);
+    --s-teal-border: rgba(42, 157, 143, 0.35);
+    --s-gold-bg: rgba(233, 196, 106, 0.15);
+    --s-gold-border: rgba(233, 196, 106, 0.35);
+    --s-orange-bg: rgba(244, 162, 97, 0.15);
+    --s-orange-border: rgba(244, 162, 97, 0.35);
+
+    /* Borders */
+    --s-border: var(--border);          /* #D7EAE5 */
+    --s-border-hover: var(--teal);      /* #2A9D8F */
+    --s-border-input: var(--border);    /* #D7EAE5 */
+
+    /* Shadows */
+    --s-shadow-soft: 0 4px 20px rgba(22, 56, 50, 0.08);
+    --s-shadow-glow-coral: 0 0 20px rgba(231, 111, 81, 0.22);
+    --s-shadow-glow-teal: 0 0 12px rgba(42, 157, 143, 0.18);
+
+    /* Scrollbar */
+    --s-scrollbar-track: var(--pale-mint);
+    --s-scrollbar-thumb: var(--soft-mint);
+    --s-scrollbar-thumb-hover: var(--teal);
+
+    /* Floating orbs — from palette */
+    --s-orb-1: var(--mint);             /* #AFE7D9 */
+    --s-orb-2: var(--soft-coral);       /* #E8C2B5 */
+    --s-orb-3: var(--soft-mint);        /* #B9DED8 */
+    --s-orb-4: var(--gold);             /* #E9C46A */
+    --s-orb-opacity-1: 0.55;
+    --s-orb-opacity-2: 0.45;
+    --s-orb-opacity-3: 0.50;
+    --s-orb-opacity-4: 0.25;
+
+    /* Selection */
+    --s-selection-bg: var(--coral);
+    --s-selection-text: var(--white);
+
+    /* Tech grid */
+    --s-grid-dot: rgba(42, 157, 143, 0.14);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VIEW TRANSITION — Radial Wipe Animation
+   Uses the modern View Transition API for a fun theme switch.
+   ═══════════════════════════════════════════════════════════ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 9999;
+    animation: theme-wipe 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes theme-wipe {
+    from {
+        clip-path: circle(0% at var(--toggle-x, 95%) var(--toggle-y, 5%));
+    }
+    to {
+        clip-path: circle(150% at var(--toggle-x, 95%) var(--toggle-y, 5%));
+    }
+}
+
+/* Fallback transition for browsers without View Transition API */
+.theme-transitioning * {
+    transition: background-color 0.4s ease, color 0.3s ease, 
+                border-color 0.3s ease, box-shadow 0.3s ease,
+                fill 0.3s ease, stroke 0.3s ease !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FONT UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+
+@layer utilities {
+    .font-editorial {
+        font-family: 'Plus Jakarta Sans', 'Space Grotesk', -apple-system, sans-serif;
+    }
+
+    .font-paper-mono {
+        font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .font-paper-body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .font-serif-accent {
+        font-family: 'Cormorant Garamond', serif;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════ */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        min-height: 100%;
+        position: relative;
+        font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+        background-color: #122027;
+        color: #F1F5F9;
+    }
+
+    /* Theme-aware selection */
+    ::selection {
+        background-color: var(--s-selection-bg, #E76F51);
+        color: var(--s-selection-text, #FFFFFF);
+    }
+
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--s-scrollbar-track, #0E1A20);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--s-scrollbar-thumb, #264653);
+        border-radius: 4px;
+        border: 1px solid rgba(42, 157, 143, 0.2);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--s-scrollbar-thumb-hover, #2A9D8F);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STUDENT PAGE UTILITY CLASSES
+   These use CSS variables so they auto-adapt to theme.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Main page background */
+.student-page {
+    background-color: var(--s-bg);
+    color: var(--s-text);
+    transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+/* Header */
+.student-header {
+    background-color: var(--s-bg-header-solid, #162932);
+    border-color: var(--s-border);
+    /* backdrop-filter removed — solid color is faster on low-end GPUs */
+}
+
+/* Cards */
+.student-card {
+    background-color: var(--s-bg-card-solid);
+    border: 1px solid var(--s-border);
+    /* backdrop-filter removed — solid color is faster on low-end GPUs */
+    box-shadow: var(--s-shadow-soft);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.student-card:hover {
+    border-color: var(--s-border-hover);
+}
+
+/* Text hierarchy */
+.student-text { color: var(--s-text); }
+.student-text-heading { color: var(--s-text-heading); }
+.student-text-secondary { color: var(--s-text-secondary); }
+.student-text-muted { color: var(--s-text-muted); }
+
+/* Accent colors */
+.student-accent-coral { color: var(--s-accent-coral); }
+.student-accent-teal { color: var(--s-accent-teal); }
+.student-accent-gold { color: var(--s-accent-gold); }
+.student-accent-orange { color: var(--s-accent-orange); }
+
+/* Buttons */
+.student-btn-primary {
+    background-color: var(--s-accent-coral);
+    color: #FFFFFF;
+    box-shadow: var(--s-shadow-glow-coral);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.student-btn-primary:hover {
+    background-color: var(--s-accent-coral-hover);
+}
+
+.student-btn-secondary {
+    background-color: var(--s-bg-card-solid);
+    color: var(--s-text);
+    border: 1px solid var(--s-border);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.student-btn-secondary:hover {
+    background-color: var(--s-bg-elevated);
+    border-color: var(--s-border-hover);
+}
+
+/* Input */
+.student-input {
+    background-color: var(--s-bg-input);
+    border: 2px solid var(--s-border-input);
+    color: var(--s-accent-gold);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.student-input:focus {
+    border-color: var(--s-accent-teal);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--s-teal-bg);
+}
+
+.student-input::placeholder {
+    color: var(--s-text-muted);
+}
+
+/* Footer */
+.student-footer {
+    background-color: var(--s-bg-alt);
+    border-color: var(--s-border);
+    color: var(--s-text-secondary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Tech grid background — theme-aware */
+.student-grid {
+    background-image: radial-gradient(var(--s-grid-dot) 1px, transparent 1px);
+    background-size: 28px 28px;
+}
+
+/* Badges */
+.student-badge-coral {
+    background-color: var(--s-coral-bg);
+    color: var(--s-accent-coral);
+    border-color: var(--s-coral-border);
+}
+
+.student-badge-teal {
+    background-color: var(--s-teal-bg);
+    color: var(--s-accent-teal);
+    border-color: var(--s-teal-border);
+}
+
+.student-badge-gold {
+    background-color: var(--s-gold-bg);
+    color: var(--s-accent-gold);
+    border-color: var(--s-gold-border);
+}
+
+.student-badge-orange {
+    background-color: var(--s-orange-bg);
+    color: var(--s-accent-orange);
+    border-color: var(--s-orange-border);
+}
+
+/* ─── Keyframe Animations ─── */
+
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(1deg);
+    }
+}
+
+@keyframes float-slower {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(-0.5deg);
+    }
+}
+
+@keyframes drift-x {
+
+    0%,
+    100% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes draw-line {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes pulse-warm {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(194, 65, 12, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(194, 65, 12, 0);
+    }
+}
+
+@keyframes pulse-critical {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(220, 38, 38, 0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes check-draw {
+    from {
+        stroke-dashoffset: 24;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale-in {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    50%,
+    90% {
+        transform: translateX(-4px);
+    }
+
+    30%,
+    70% {
+        transform: translateX(4px);
+    }
+}
+
+/* ─── Utility Animation Classes ─── */
+
+.animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slower {
+    animation: float-slower 8s ease-in-out infinite;
+}
+
+.animate-drift-x {
+    animation: drift-x 7s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out both;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.4s ease-out both;
+}
+
+.animate-draw-line {
+    animation: draw-line 0.8s ease-out both;
+}
+
+.animate-pulse-warm {
+    animation: pulse-warm 2s ease-in-out infinite;
+}
+
+.animate-pulse-critical {
+    animation: pulse-critical 1s ease-in-out infinite;
+}
+
+.animate-scale-in {
+    animation: scale-in 0.35s ease-out both;
+}
+
+.animate-shake {
+    animation: shake 0.4s ease-out;
+}
+
+/* Stagger delays */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+.delay-600 {
+    animation-delay: 0.6s;
+}
+
+.delay-700 {
+    animation-delay: 0.7s;
+}
+
+.delay-800 {
+    animation-delay: 0.8s;
+}
+
+/* ─── Focus States ─── */
+.focus-terracotta:focus {
+    outline: none;
+    border-color: #C2410C;
+    box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.15);
+}
+
+/* ─── Custom Components ─── */
+
+.card-warm {
+    background-color: #172A32;
+    border: 1px solid rgba(42, 157, 143, 0.25);
+    border-radius: 12px;
+}
+
+.card-warm-elevated {
+    background-color: #1E3742;
+    border: 1px solid rgba(42, 157, 143, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-glass {
+    background: rgba(27, 49, 59, 0.95);
+    /* backdrop-filter removed — solid color is faster on low-end GPUs */
+    border: 1px solid rgba(42, 157, 143, 0.25);
+}
+
+.header-dark {
+    background-color: #122027;
+    color: #F8FAFC;
+}
+
+/* Subtle tech grid background with teal dots */
+.bg-tech-grid {
+    background-image: radial-gradient(rgba(42, 157, 143, 0.14) 1px, transparent 1px);
+    background-size: 28px 28px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME CSS OVERRIDES
+   For pages that use hardcoded colors (ExamPage, FeedbackPage),
+   these overrides swap dark values to light equivalents when
+   `.student-page` is present under `[data-theme="light"]`.
+   Adheres to user palette:
+   Forest (#163832), Coral (#E76F51), Teal (#2A9D8F), Gold (#E9C46A),
+   Orange (#F4A261), Mint (#AFE7D9), Soft Mint (#B9DED8),
+   Pale Mint (#E8F4F1), White (#FFFFFF), Off-White (#F9FCFB),
+   Soft Coral (#E8C2B5), Border (#D7EAE5).
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="light"] .student-page {
+    /* Main page canvas */
+    background-color: var(--s-bg) !important;
+    color: var(--s-text) !important;
+}
+
+/* Background containers */
+[data-theme="light"] .student-page [class*="bg-[#122027]"]:not([class*="blur-3xl"]) {
+    background-color: var(--s-bg) !important;
+}
+
+[data-theme="light"] .student-page [class*="bg-[#1B313B]"]:not([class*="blur-3xl"]) {
+    background-color: var(--s-bg-card-solid) !important;
+    border-color: var(--s-border) !important;
+}
+
+[data-theme="light"] .student-page [class*="bg-[#162932]"]:not([class*="blur-3xl"]) {
+    background-color: var(--s-bg-elevated) !important;
+}
+
+[data-theme="light"] .student-page [class*="bg-[#0E1A20]"]:not([class*="blur-3xl"]) {
+    background-color: var(--s-bg-alt) !important;
+}
+
+/* Text color overrides */
+[data-theme="light"] .student-page [class*="text-[#9CB6BF]"] {
+    color: var(--s-text-secondary) !important;
+}
+
+[data-theme="light"] .student-page [class*="text-white"] {
+    color: var(--s-text-heading) !important;
+}
+
+/* ── Crucial Contrast Protection: Solid Accent Buttons & Badges keep White Text ── */
+[data-theme="light"] .student-page .student-btn-primary,
+[data-theme="light"] .student-page .student-btn-primary *,
+[data-theme="light"] .student-page [class*="bg-[#E76F51]"]:not([class*="/"]),
+[data-theme="light"] .student-page [class*="bg-[#E76F51]"]:not([class*="/"]) *,
+[data-theme="light"] .student-page [class*="from-[#E76F51]"],
+[data-theme="light"] .student-page [class*="from-[#E76F51]"] *,
+[data-theme="light"] .student-page [class*="from-[#2A9D8F]"],
+[data-theme="light"] .student-page [class*="from-[#2A9D8F]"] *,
+[data-theme="light"] .student-page [class*="bg-[#2A9D8F]"]:not([class*="/"]),
+[data-theme="light"] .student-page [class*="bg-[#2A9D8F]"]:not([class*="/"]) *,
+[data-theme="light"] .student-page [class*="bg-emerald-"]:not([class*="/"]),
+[data-theme="light"] .student-page [class*="bg-emerald-"]:not([class*="/"]) *,
+[data-theme="light"] .student-page [class*="bg-red-"]:not([class*="/"]),
+[data-theme="light"] .student-page [class*="bg-red-"]:not([class*="/"]) * {
+    color: #FFFFFF !important;
+}
+
+/* Semi-transparent tint backgrounds retain dark forest text for readability */
+[data-theme="light"] .student-page [class*="bg-[#2A9D8F]/"],
+[data-theme="light"] .student-page [class*="bg-[#E76F51]/"] {
+    color: var(--forest) !important;
+}
+
+/* Hover highlights in light theme */
+[data-theme="light"] .student-page [class*="hover:bg-[#264653]"]:hover {
+    background-color: var(--soft-mint) !important;
+    color: var(--forest) !important;
+}
+
+/* Border overrides */
+[data-theme="light"] .student-page [class*="border-[rgba(42,157,143"] {
+    border-color: var(--s-border) !important;
+}
+
+/* Form inputs & textareas */
+[data-theme="light"] .student-page input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="light"] .student-page textarea {
+    background-color: var(--white) !important;
+    color: var(--forest) !important;
+    border-color: var(--border) !important;
+}
+
+[data-theme="light"] .student-page input::placeholder,
+[data-theme="light"] .student-page textarea::placeholder {
+    color: var(--s-text-muted) !important;
+}
+
+/* Option Cards in ExamPage */
+[data-theme="light"] .student-page button[class*="border-[#2A9D8F]"] {
+    background-color: rgba(42, 157, 143, 0.10) !important;
+    border-color: var(--teal) !important;
+}
+[data-theme="light"] .student-page button[class*="border-[#2A9D8F]"] .text-white {
+    color: var(--forest) !important;
+}
+[data-theme="light"] .student-page button[class*="border-[#2A9D8F]"] [class*="bg-[#2A9D8F]"]:not([class*="/"]) {
+    background-color: var(--teal) !important;
+    color: #FFFFFF !important;
+}
+
+/* Question Palette in ExamPage */
+/* 1. Visited (not answered): soft coral indicator */
+[data-theme="light"] .student-page [class*="bg-[#264653]"]:not([class*="blur-3xl"]) {
+    background-color: var(--soft-coral) !important;
+    color: var(--forest) !important;
+    border-color: var(--soft-coral) !important;
+}
+/* 2. Marked for Review: gold indicator */
+[data-theme="light"] .student-page [class*="bg-[#E9C46A]"]:not([class*="blur-3xl"]) {
+    background-color: var(--gold) !important;
+    color: var(--forest) !important;
+    border-color: var(--gold) !important;
+}
+/* 3. Attempted / Answered: teal indicator */
+[data-theme="light"] .student-page [class*="bg-[#2A9D8F]"]:not([class*="/"]):not([class*="blur-3xl"]) {
+    background-color: var(--teal) !important;
+    color: #FFFFFF !important;
+    border-color: var(--teal) !important;
+}
+
+/* Tech grid in light theme */
+[data-theme="light"] .student-page.bg-tech-grid,
+[data-theme="light"] .student-page .bg-tech-grid {
+    background-image: radial-gradient(var(--s-grid-dot) 1px, transparent 1px) !important;
+}
+
+/* Selection color override */
+[data-theme="light"] .student-page [class*="selection:bg-[#E76F51]"] ::selection,
+[data-theme="light"] .student-page ::selection {
+    background-color: var(--coral) !important;
+    color: var(--white) !important;
+}
+
+/* Ambient glow orbs for light mode */
+[data-theme="light"] .student-page [class*="bg-[#264653]"].blur-3xl {
+    background-color: var(--s-orb-1) !important;
+    opacity: var(--s-orb-opacity-1) !important;
+}
+[data-theme="light"] .student-page [class*="bg-[#2A9D8F]"].blur-3xl {
+    background-color: var(--s-orb-2) !important;
+    opacity: var(--s-orb-opacity-2) !important;
+}
+[data-theme="light"] .student-page [class*="bg-[#E76F51]"].blur-3xl {
+    background-color: var(--s-orb-3) !important;
+    opacity: var(--s-orb-opacity-3) !important;
+}
+[data-theme="light"] .student-page [class*="bg-[#E9C46A]"].blur-3xl {
+    background-color: var(--s-orb-4) !important;
+    opacity: var(--s-orb-opacity-4) !important;
+}
+
+/* Gold text colors for warnings / ratings */
+[data-theme="light"] .student-page [class*="text-[#E9C46A]"] {
+    color: #B8860B !important;
+}
+
+/* Smooth transitions for all overridden elements */
+[data-theme="light"] .student-page *,
+[data-theme="dark"] .student-page * {
+    transition: background-color 0.35s ease, color 0.3s ease, 
+                border-color 0.3s ease, box-shadow 0.3s ease;
+}
