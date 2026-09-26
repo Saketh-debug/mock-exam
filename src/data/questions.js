@@ -1,6 +1,6 @@
 // ── AAC Mock Test — 30 Questions + Answer Key ──
 // Source: AAC Mock Test - Question Paper with Answer Key.md
-// Questions with images (Q15, Q16, Q25) include alt descriptions.
+// Questions with images use the optional `imageUrl` and `imageAlt` fields.
 
 export const QUESTIONS = [
   // ── Section 1: C Basics (3 questions) ──
@@ -29,7 +29,7 @@ export const QUESTIONS = [
     correctAnswer: "C",
   },
 
-  // ── Section 2: Mathematics (12 questions) ──
+  // ── Section 2: Mathematics (15 questions) ──
   {
     id: 4,
     subject: "Mathematics",
@@ -133,6 +133,8 @@ export const QUESTIONS = [
     subject: "Mathematics",
     subjectShort: "Math",
     text: `Consider the groups: English, Math, and Chinese.\n\nWhich of the following diagrams shows this relationship correctly?\n\n[Note: This question has a visual diagram. In the actual exam, refer to the diagram provided.]\n\n• Diagram A: All three circles separate\n• Diagram B: English and Math overlap, Chinese separate\n• Diagram C: All three circles overlap\n• Diagram D: English ⊂ Math, Chinese separate\n• Diagram E: English ⊂ Chinese, Math separate (English is a subset of Chinese language group)`,
+    imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408544/817108cb-44d6-4b1f-aae4-f9ecf55354a5.png",
+    imageAlt: "Relationship diagram for English, Math, and Chinese groups",
     options: {
       A: "Diagram A",
       B: "Diagram B",
@@ -144,12 +146,13 @@ export const QUESTIONS = [
     fiveOptions: true,
   },
 
-  // ── Section 3: Aptitude (10 questions) ──
   {
     id: 16,
-    subject: "Aptitude",
-    subjectShort: "Aptitude",
+    subject: "Mathematics",
+    subjectShort: "Math",
     text: `Trace the figure that contains Figure (X) as an embedded part.\n\n[Figure (X): A horizontal zigzag line with a central trapezoid below a triangular peak]\n\n[Note: This question has visual figures. In the actual exam, refer to the diagrams provided.]\n\n• Figure (a): Contains only diagonal lines\n• Figure (b): Contains overlapping triangles\n• Figure (c): Contains a simple square with diagonals\n• Figure (d): Contains the trapezoid + triangular peak pattern embedded within it`,
+    imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408619/c494af4b-519f-4ee2-98c0-fdd5b18cb174.png",
+    imageAlt: "Embedded figure question with four answer figures",
     options: {
       A: "Figure (a)",
       B: "Figure (b)",
@@ -160,16 +163,16 @@ export const QUESTIONS = [
   },
   {
     id: 17,
-    subject: "Aptitude",
-    subjectShort: "Aptitude",
+    subject: "Mathematics",
+    subjectShort: "Math",
     text: `In a certain code language, TABLE is coded as UBCMF and CHAIR is coded as DIBJS. How is PLANE coded in that language?`,
     options: { A: "QMBOD", B: "QMBOF", C: "QLBOF", D: "PMBOF" },
     correctAnswer: "B",
   },
   {
     id: 18,
-    subject: "Aptitude",
-    subjectShort: "Aptitude",
+    subject: "Mathematics",
+    subjectShort: "Math",
     text: `Manick walked 40 m towards North, took a left turn and walked 20 m. He again took a left turn and walked 40 m. How far and in which direction is he from the starting point?`,
     options: {
       A: "20 m East",
@@ -179,6 +182,8 @@ export const QUESTIONS = [
     },
     correctAnswer: "D",
   },
+
+  // ── Section 3: Aptitude (7 questions) ──
   {
     id: 19,
     subject: "Aptitude",
@@ -232,6 +237,8 @@ export const QUESTIONS = [
     subject: "Aptitude",
     subjectShort: "Aptitude",
     text: `Select the combination in which some or all figures overlap to form an equilateral triangle.\n\n[Note: This question has visual component figures (A), (B), (C), (D), (E). In the actual exam, refer to the diagrams provided.]\n\n• (A) A small right triangle\n• (B) A larger right triangle (mirror of A)\n• (C) A rhombus\n• (D) A right triangle of different size\n• (E) A small triangular wedge`,
+    imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408700/53457c3d-265f-4776-995d-7abcd0e8b403.png",
+    imageAlt: "Five component figures for forming an equilateral triangle",
     options: { A: "ABC", B: "ACE", C: "BCD", D: "BDE" },
     correctAnswer: "D",
   },

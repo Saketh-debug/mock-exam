@@ -74,6 +74,21 @@ export default function useTabSwitchProctoring({ examEnded = false } = {}) {
         });
     }, []);
 
+    // This function is intentionally called directly by the warning button's
+    // click handler. Fullscreen APIs require that direct user activation.
+    const enterFullscreen = useCallback(async () => {
+        if (document.fullscreenElement) return true;
+
+        try {
+            await document.documentElement.requestFullscreen();
+            hasEnteredFullscreenRef.current = Boolean(document.fullscreenElement);
+            return hasEnteredFullscreenRef.current;
+        } catch (_) {
+            setWarningMessage("Fullscreen could not be enabled. Please allow fullscreen for this site and click the button again.");
+            return false;
+        }
+    }, []);
+
     // ─── Fullscreen enforcement ───
     useEffect(() => {
         if (examEndedRef.current) return;
@@ -96,17 +111,14 @@ export default function useTabSwitchProctoring({ examEnded = false } = {}) {
                 buttonText: "Return to Fullscreen",
                 isViol: true,
                 action: async () => {
-                    try {
-                        await document.documentElement.requestFullscreen();
-                    } catch (_) { }
-                    dismissWarning();
+                    if (await enterFullscreen()) dismissWarning();
                 },
             });
         }
 
         document.addEventListener("fullscreenchange", handleFullscreenChange);
         return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    }, [triggerWarning, dismissWarning, recordViolation, violationCount]);
+    }, [triggerWarning, dismissWarning, recordViolation, violationCount, enterFullscreen]);
 
     // ─── Initial fullscreen gate ───
     useEffect(() => {
@@ -122,11 +134,7 @@ export default function useTabSwitchProctoring({ examEnded = false } = {}) {
             buttonText: "Enter Fullscreen",
             isViol: false,
             action: async () => {
-                try {
-                    await document.documentElement.requestFullscreen();
-                    hasEnteredFullscreenRef.current = true;
-                } catch (_) { }
-                dismissWarning();
+                if (await enterFullscreen()) dismissWarning();
             },
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

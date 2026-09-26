@@ -369,6 +369,16 @@ export default function ExamPage() {
                                     {/* Question Body */}
                                     <QuestionText text={currentQ.text} />
 
+                                    {currentQ.imageUrl && (
+                                        <figure className="mb-8 overflow-hidden rounded-xl border border-[rgba(42,157,143,0.35)] bg-white p-2">
+                                            <img
+                                                src={currentQ.imageUrl}
+                                                alt={currentQ.imageAlt || `Diagram for question ${currentIndex + 1}`}
+                                                className="mx-auto max-h-[420px] w-auto max-w-full rounded-lg object-contain"
+                                            />
+                                        </figure>
+                                    )}
+
                                     {/* MCQ Options */}
                                     <div className="space-y-3">
                                         {Object.entries(currentQ.options).map(([optKey, optText]) => {
