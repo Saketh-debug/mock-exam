@@ -55,7 +55,8 @@ export const QUESTIONS = [
     id: 6,
     subject: "Mathematics",
     subjectShort: "Math",
-    text: `For real numbers x and y satisfying the inequality 2√(sin²x − 2sinx + 5) · (1/4sin²y) ≤ 1, determine the possible value of 2sin²y:`,
+    text: `For real numbers x and y satisfying the inequality 2\sqrt{\sin^2 x - 2\sin x + 5} \cdot \left(\frac{1}{4\sin^2 y}\right) \le 1
+, determine the possible value of 2sin²y:`,
     options: { A: "0", B: "1", C: "2", D: "4" },
     correctAnswer: "C",
   },
@@ -150,7 +151,7 @@ export const QUESTIONS = [
     id: 16,
     subject: "Mathematics",
     subjectShort: "Math",
-    text: `Trace the figure that contains Figure (X) as an embedded part.\n\n[Figure (X): A horizontal zigzag line with a central trapezoid below a triangular peak]\n\n[Note: This question has visual figures. In the actual exam, refer to the diagrams provided.]\n\n• Figure (a): Contains only diagonal lines\n• Figure (b): Contains overlapping triangles\n• Figure (c): Contains a simple square with diagonals\n• Figure (d): Contains the trapezoid + triangular peak pattern embedded within it`,
+    text: `Trace the figure that contains Figure (X) as an embedded part.\n\n[Figure (X): A horizontal zigzag line with a central trapezoid below a triangular peak]\n\n`,
     imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408619/c494af4b-519f-4ee2-98c0-fdd5b18cb174.png",
     imageAlt: "Embedded figure question with four answer figures",
     options: {
@@ -236,7 +237,7 @@ export const QUESTIONS = [
     id: 25,
     subject: "Aptitude",
     subjectShort: "Aptitude",
-    text: `Select the combination in which some or all figures overlap to form an equilateral triangle.\n\n[Note: This question has visual component figures (A), (B), (C), (D), (E). In the actual exam, refer to the diagrams provided.]\n\n• (A) A small right triangle\n• (B) A larger right triangle (mirror of A)\n• (C) A rhombus\n• (D) A right triangle of different size\n• (E) A small triangular wedge`,
+    text: `Select the combination in which some or all figures overlap to form an equilateral triangle.\n\n`,
     imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408700/53457c3d-265f-4776-995d-7abcd0e8b403.png",
     imageAlt: "Five component figures for forming an equilateral triangle",
     options: { A: "ABC", B: "ACE", C: "BCD", D: "BDE" },
