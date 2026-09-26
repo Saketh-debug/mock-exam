@@ -55,8 +55,9 @@ export const QUESTIONS = [
     id: 6,
     subject: "Mathematics",
     subjectShort: "Math",
-    text: `For real numbers x and y satisfying the inequality 2\sqrt{\sin^2 x - 2\sin x + 5} \cdot \left(\frac{1}{4\sin^2 y}\right) \le 1
-, determine the possible value of 2sin²y:`,
+    text: `For real numbers x and y satisfying the inequality given, determine the possible value of 2sin²y:`,
+    imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790418282/95f53f9b-1678-42a5-9538-f04dcd321ec4.png",
+    imageAlt: "Inequality Question",
     options: { A: "0", B: "1", C: "2", D: "4" },
     correctAnswer: "C",
   },
