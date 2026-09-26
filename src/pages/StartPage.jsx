@@ -36,6 +36,8 @@ export default function StartPage() {
             startedAt: Date.now(),
             answers: {},
             marks: {},
+            visited: [],
+            currentIndex: 0,
         }));
         navigate('/exam');
     }

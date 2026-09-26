@@ -7,6 +7,16 @@ import FooterLogos from '../components/FooterLogos';
 import ThemeToggle from '../components/ThemeToggle';
 
 const EXAM_DURATION_SEC = 60 * 60; // 60 minutes
+const EXAM_SESSION_KEY = 'mockExamSession';
+
+const readExamSession = () => {
+    try {
+        const session = JSON.parse(sessionStorage.getItem(EXAM_SESSION_KEY) || '{}');
+        return session && typeof session === 'object' ? session : {};
+    } catch {
+        return {};
+    }
+};
 
 // ── Subject ordering ──
 const SUBJECT_PRIORITY = { Mathematics: 1, Aptitude: 2, English: 3, 'C Basics': 4 };
@@ -99,20 +109,26 @@ export default function ExamPage() {
 
     // Guard: must have a session
     useEffect(() => {
-        const session = sessionStorage.getItem('mockExamSession');
+        const session = sessionStorage.getItem(EXAM_SESSION_KEY);
         if (!session) {
             navigate('/start');
         }
     }, [navigate]);
 
     const questions = useMemo(() => organizeQuestions(QUESTIONS), []);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [answers, setAnswers] = useState({});
-    const [marks, setMarks] = useState({});
-    const [visited, setVisited] = useState(() => new Set([questions[0]?.id]));
+    const [currentIndex, setCurrentIndex] = useState(() => {
+        const savedIndex = Number(readExamSession().currentIndex);
+        return Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < questions.length ? savedIndex : 0;
+    });
+    const [answers, setAnswers] = useState(() => readExamSession().answers || {});
+    const [marks, setMarks] = useState(() => readExamSession().marks || {});
+    const [visited, setVisited] = useState(() => {
+        const savedVisited = readExamSession().visited;
+        return new Set(Array.isArray(savedVisited) ? savedVisited : [questions[0]?.id]);
+    });
     const [timeRemaining, setTimeRemaining] = useState(() => {
         try {
-            const s = JSON.parse(sessionStorage.getItem('mockExamSession') || '{}');
+            const s = readExamSession();
             if (s.startedAt) {
                 const elapsed = Math.floor((Date.now() - s.startedAt) / 1000);
                 return Math.max(0, EXAM_DURATION_SEC - elapsed);
@@ -125,8 +141,30 @@ export default function ExamPage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const timerRef = useRef(null);
     const isExpiredRef = useRef(false);
+    const hasSubmittedRef = useRef(false);
+    const answersRef = useRef(answers);
 
     const currentQ = questions[currentIndex];
+
+    // Keep the most recent answer state available to the timer callback. The
+    // interval is intentionally stable, so it must not rely on a stale render.
+    useEffect(() => {
+        answersRef.current = answers;
+    }, [answers]);
+
+    // Persist the in-progress exam only in the browser session. This also lets
+    // a refresh resume answers, marks, visited questions, and the current page.
+    useEffect(() => {
+        const existingSession = readExamSession();
+        sessionStorage.setItem(EXAM_SESSION_KEY, JSON.stringify({
+            ...existingSession,
+            startedAt: existingSession.startedAt || Date.now(),
+            answers,
+            marks,
+            visited: [...visited],
+            currentIndex,
+        }));
+    }, [answers, marks, visited, currentIndex]);
 
     // Track visited
     useEffect(() => {
@@ -184,8 +222,14 @@ export default function ExamPage() {
     function handleSelectOption(optKey) {
         if (isSubmitted || !currentQ) return;
         const normalizedOptionKey = normalizeOptionKey(optKey);
-        const current = answers[currentQ.id];
-        setAnswers(prev => ({ ...prev, [currentQ.id]: current === normalizedOptionKey ? null : normalizedOptionKey }));
+        setAnswers(prev => {
+            const next = {
+                ...prev,
+                [currentQ.id]: prev[currentQ.id] === normalizedOptionKey ? null : normalizedOptionKey,
+            };
+            answersRef.current = next;
+            return next;
+        });
     }
 
     function handleToggleMark() {
@@ -194,15 +238,17 @@ export default function ExamPage() {
     }
 
     function handleFinalSubmit() {
-        if (isSubmitted) return;
+        if (hasSubmittedRef.current) return;
+        hasSubmittedRef.current = true;
         clearInterval(timerRef.current);
         cleanupProctoring();
+        const submittedAnswers = answersRef.current;
         // Compute score
         let score = 0;
         questions.forEach(q => {
-            if (answers[q.id] && normalizeOptionKey(answers[q.id]) === normalizeOptionKey(ANSWER_KEY[q.id])) score++;
+            if (submittedAnswers[q.id] && normalizeOptionKey(submittedAnswers[q.id]) === normalizeOptionKey(ANSWER_KEY[q.id])) score++;
         });
-        sessionStorage.setItem('mockExamResult', JSON.stringify({ answers, score, total: questions.length }));
+        sessionStorage.setItem('mockExamResult', JSON.stringify({ answers: submittedAnswers, score, total: questions.length }));
         setIsSubmitted(true);
         setShowSubmitModal(false);
         // Exit fullscreen
