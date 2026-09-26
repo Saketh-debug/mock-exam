@@ -32,6 +32,7 @@ export default function StartPage() {
             console.warn('Fullscreen request skipped or blocked:', fsErr);
         }
         // Initialize exam session
+        sessionStorage.removeItem('mock_exam_violations');
         sessionStorage.setItem('mockExamSession', JSON.stringify({
             startedAt: Date.now(),
             answers: {},
