@@ -439,16 +439,23 @@ export default function ExamPage() {
                     </AnimatePresence>
 
                     {/* Mobile Primary Nav */}
-                    <div className="sm:hidden grid grid-cols-2 gap-3 mt-4">
-                        <button onClick={() => setCurrentIndex(prev => Math.max(0, prev - 1))} disabled={currentIndex === 0}
-                            id="mobile-prev-btn"
-                            className="py-3.5 px-4 rounded-xl border border-[rgba(42,157,143,0.35)] bg-[#1B313B] active:bg-[#264653] text-white text-base font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg disabled:opacity-30 cursor-pointer">
-                            <span>←</span><span>Previous</span>
-                        </button>
-                        <button onClick={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))} disabled={currentIndex === questions.length - 1}
-                            id="mobile-next-btn"
-                            className="py-3.5 px-4 rounded-xl bg-[#E76F51] active:bg-[#F4A261] text-white text-base font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(231,111,81,0.35)] disabled:opacity-30 cursor-pointer">
-                            <span>Next</span><span>→</span>
+                    <div className="sm:hidden flex flex-col gap-2.5 mt-4">
+                        <div className="grid grid-cols-2 gap-3">
+                            <button onClick={() => setCurrentIndex(prev => Math.max(0, prev - 1))} disabled={currentIndex === 0}
+                                id="mobile-prev-btn"
+                                className="py-3.5 px-4 rounded-xl border border-[rgba(42,157,143,0.35)] bg-[#1B313B] active:bg-[#264653] text-white text-base font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg disabled:opacity-30 cursor-pointer">
+                                <span>←</span><span>Previous</span>
+                            </button>
+                            <button onClick={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))} disabled={currentIndex === questions.length - 1}
+                                id="mobile-next-btn"
+                                className="py-3.5 px-4 rounded-xl bg-[#E76F51] active:bg-[#F4A261] text-white text-base font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(231,111,81,0.35)] disabled:opacity-30 cursor-pointer">
+                                <span>Next</span><span>→</span>
+                            </button>
+                        </div>
+                        <button onClick={() => setShowSubmitModal(true)}
+                            id="mobile-submit-btn"
+                            className="w-full py-2.5 px-4 rounded-xl bg-[#E76F51] active:bg-[#d65a3c] text-white text-xs font-bold uppercase tracking-widest flex items-center justify-center space-x-2 shadow-md transition-colors duration-150 cursor-pointer">
+                            <span>Submit Examination</span>
                         </button>
                     </div>
                 </main>
