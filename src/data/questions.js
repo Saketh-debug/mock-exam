@@ -132,7 +132,7 @@ export const QUESTIONS = [
     id: 15,
     subject: "Mathematics",
     subjectShort: "Math",
-    text: `Consider the groups: English, Math, and Chinese.\n\nWhich of the following diagrams shows this relationship correctly?\n\n[Note: This question has a visual diagram. In the actual exam, refer to the diagram provided.]\n\n• Diagram A: All three circles separate\n• Diagram B: English and Math overlap, Chinese separate\n• Diagram C: All three circles overlap\n• Diagram D: English ⊂ Math, Chinese separate\n• Diagram E: English ⊂ Chinese, Math separate (English is a subset of Chinese language group)`,
+    text: `Consider the groups: English, Math, and Chinese.\n\nWhich of the following diagrams shows this relationship correctly?\n\n[Note: This question has a visual diagram. In the actual exam, refer to the diagram provided.]\n\n`,
     imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408544/817108cb-44d6-4b1f-aae4-f9ecf55354a5.png",
     imageAlt: "Relationship diagram for English, Math, and Chinese groups",
     options: {
