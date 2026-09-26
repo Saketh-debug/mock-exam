@@ -193,6 +193,12 @@ export default function ResultsPage() {
                                         <p className="text-sm text-[#9CB6BF] leading-relaxed line-clamp-2 whitespace-pre-wrap">
                                             {q.text.replace(/```[\s\S]*?```/g, '[code]').split('\n')[0]}
                                         </p>
+                                        {isSkipped && (
+                                            <div className="mt-3 inline-flex max-w-full items-start gap-2 rounded-lg border border-emerald-500/30 bg-emerald-950/30 px-3 py-2 text-xs text-emerald-200">
+                                                <span className="shrink-0 font-mono font-extrabold text-emerald-400">Correct answer: {correctAns}</span>
+                                                <span className="break-words">{q.options[correctAns]}</span>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Answer comparison */}
