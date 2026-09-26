@@ -134,7 +134,7 @@ export const QUESTIONS = [
     id: 15,
     subject: "Mathematics",
     subjectShort: "Math",
-    text: `Consider the groups: English, Math, and Chinese.\n\nWhich of the following diagrams shows this relationship correctly?\n\n[Note: This question has a visual diagram. In the actual exam, refer to the diagram provided.]\n\n`,
+    text: `Consider the groups: English, Math, and Chinese.\n\nWhich of the following diagrams shows this relationship correctly?\n\n`,
     imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408544/817108cb-44d6-4b1f-aae4-f9ecf55354a5.png",
     imageAlt: "Relationship diagram for English, Math, and Chinese groups",
     options: {
@@ -152,7 +152,7 @@ export const QUESTIONS = [
     id: 16,
     subject: "Mathematics",
     subjectShort: "Math",
-    text: `Trace the figure that contains Figure (X) as an embedded part.\n\n[Figure (X): A horizontal zigzag line with a central trapezoid below a triangular peak]\n\n`,
+    text: `Trace the figure that contains Figure (X) as an embedded part.\n\n`,
     imageUrl: "https://res.cloudinary.com/aacgriet/image/upload/v1790408619/c494af4b-519f-4ee2-98c0-fdd5b18cb174.png",
     imageAlt: "Embedded figure question with four answer figures",
     options: {
